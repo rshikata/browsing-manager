@@ -1,7 +1,7 @@
-import importlib
+from datetime import datetime
+from db_accessor import DBAccessor
 
-DBAccessor = importlib.import_module("db-accessor")
-DateFormatValidator = importlib.import_module("data-format-validator")
+# from data_format_validator import DataFormatValidator
 
 
 def main():
@@ -9,21 +9,28 @@ def main():
     print("[操作選択] 1: データ追加 2: 閲覧")
     mode = input("操作選択 >>")
     mode = int(mode)
-    db = DBAccessor.DBAccessor()
-    validator = DateFormatValidator.DateFormatValidator()
+
+    db = DBAccessor()
+    # validator = DataFormatValidator()
 
     try:
         # テーブル作成
-        db.create_Table()
+        db.create_table()
 
         # データの追加
         if mode == 1:
             name = input("名前 >>")
             date = input("日付(????-??-??) >>")
-            validator.valid_date(date)
-            db.insert_data(name, date)
 
-        # elif mode == 2:
+            # validator.valid_date(date)
+            datetime.strptime(date, "%Y-%m-%d")
+            if name.isalpha():
+                db.insert_data(name, date)
+            else:
+                print("名前の入力が誤りです")
+
+        elif mode == 2:
+            db.select_data()
 
         else:
             print("操作選択が不正です。")
