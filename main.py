@@ -29,8 +29,8 @@ def main():
             first_name = input("First Name >>")
             validator.validate_name(last_name)
             validator.validate_name(first_name)
-            name = f"{last_name} {first_name}"
-            validator.validate_length(name)
+            reader_name = f"{last_name} {first_name}"
+            validator.validate_length(reader_name)
             # 閲覧日
             browsing_date = input("閲覧日(????-??-??) >>")
             browsing_date = validator.validate_date(browsing_date)
@@ -39,7 +39,7 @@ def main():
             daily_report_date = validator.validate_date(daily_report_date)
 
             # データベースに登録
-            db.insert_data(DATABASE_NAME, name, browsing_date, daily_report_date)
+            db.insert_data(DATABASE_NAME, reader_name, browsing_date, daily_report_date)
 
         elif mode == 2:
             # データの取得、表示

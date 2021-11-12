@@ -9,21 +9,23 @@ class DBAccessor:
         with sqlite3.connect(database_name) as connection:
             cursor = connection.cursor()
             cursor.execute(
-                "CREATE TABLE IF NOT EXISTS report_check_status (name TEXT, browsing_date TEXT, daily_report_date TEXT,times INTEGER)"
+                "CREATE TABLE IF NOT EXISTS report_check_status (reader_name TEXT, browsing_date TEXT, daily_report_date TEXT,times INTEGER)"
             )
 
     # データの追加登録
-    def insert_data(self, database_name, name, browsing_date, daily_report_date):
+    def insert_data(self, database_name, reader_name, browsing_date, daily_report_date):
 
         with sqlite3.connect(database_name) as connection:
             cursor = connection.cursor()
             # 同じ名前の登録数をカウント
-            cursor.execute("SELECT * from report_check_status WHERE name = ?", [name])
+            cursor.execute(
+                "SELECT * from report_check_status WHERE reader_name = ?", [reader_name]
+            )
             times = len(cursor.fetchall()) + 1
             # DBにデータを登録
             cursor.execute(
                 "INSERT INTO report_check_status VALUES(?,?,?,?)",
-                [name, browsing_date, daily_report_date, times],
+                [reader_name, browsing_date, daily_report_date, times],
             )
             connection.commit()
 
