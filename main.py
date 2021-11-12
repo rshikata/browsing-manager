@@ -23,14 +23,23 @@ def main():
 
         # データの追加
         if mode == 1:
-            name = input("名前 >>")
-            validator.validate_name(name)
-            validator.validate_length(name)
-            date = input("日付(????-??-??) >>")
-            date = validator.validate_date(date)
+            # 閲覧者名
+            print("追加情報：名前")
+            last_name = input("Last Name >>")
+            first_name = input("First Name >>")
+            validator.validate_name(last_name)
+            validator.validate_name(first_name)
+            reader_name = f"{last_name} {first_name}"
+            validator.validate_length(reader_name)
+            # 閲覧日
+            browsing_date = input("閲覧日(????-??-??) >>")
+            browsing_date = validator.validate_date(browsing_date)
+            # 閲覧した日報の日付
+            daily_report_date = input("日報の日付(????-??-??) >>")
+            daily_report_date = validator.validate_date(daily_report_date)
 
             # データベースに登録
-            db.insert_data(DATABASE_NAME, name, date)
+            db.insert_data(DATABASE_NAME, reader_name, browsing_date, daily_report_date)
 
         elif mode == 2:
             # データの取得、表示
@@ -40,8 +49,8 @@ def main():
             print("操作選択が不正です。")
 
     except ValueError as e:
+        print("日付のフォーマットが不正です。")
         print(e)
-        print("入力が不正です。")
     except Exception as e:
         print(e)
 

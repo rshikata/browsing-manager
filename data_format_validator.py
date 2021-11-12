@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 
 
 class DataFormatValidator:
@@ -10,10 +11,13 @@ class DataFormatValidator:
 
     # 入力された名前に記号が含まれていないかチェック
     def validate_name(self, name):
+        pattern = re.compile("[a-zA-Z]")
         if not name.isalpha():
-            raise ValueError
+            raise Exception("名前に記号が含まれています。")
+        if len(name) != len(re.findall(pattern, name)):
+            raise Exception("名前に全角文字が含まれています。")
 
     # 入力された文字列の長さをチェック
     def validate_length(self, text):
         if len(text) > 50:
-            raise ValueError
+            raise Exception("名前の字数オーバーです。")
