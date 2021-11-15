@@ -13,7 +13,17 @@ def main():
     try:
         operator = DBOperator()
         mode = operator.select_mode()
-        operator.operate_database(DATABASE_NAME, mode)
+        operator.create_database(DATABASE_NAME)
+        if mode == 1:
+            # データベースに登録
+            operator.add_data(DATABASE_NAME)
+
+        elif mode == 2:
+            # データの取得、表示
+            operator.display_data(DATABASE_NAME)
+
+        else:
+            print("操作選択が不正です。")
 
     except ValueError as e:
         print(e)
