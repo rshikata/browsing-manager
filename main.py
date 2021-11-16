@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from db_operator import DBOperator
-from data_format_validator import DataFormatValidator
 
 
 def main():
@@ -12,7 +11,10 @@ def main():
 
     try:
         operator = DBOperator()
+        # 操作を選択
+        # mode 1: データ追加　2:閲覧
         mode = operator.select_mode()
+        # DBかテーブルが無ければ作成
         operator.create_database(DATABASE_NAME)
         if mode == 1:
             # データベースに登録

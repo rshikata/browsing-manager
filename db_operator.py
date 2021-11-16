@@ -10,11 +10,10 @@ class DBOperator:
         mode = input("操作選択 >>")
         return int(mode)
 
-    # DBやテーブル存在しない場合は作成する
+    # DBかテーブル存在しない場合は作成
     def create_database(self, DATABASE_NAME):
-
         db = DBAccessor()
-        # テーブル作成
+        # DB、テーブルの作成
         db.create_table(DATABASE_NAME)
 
     # 追加情報を取得し、DBに追加
@@ -23,7 +22,7 @@ class DBOperator:
         validator = DataFormatValidator()
 
         # 閲覧者名
-        print("追加情報：名前")
+        print("追加情報：名前(ローマ字)")
         last_name = input("Last Name >>")
         first_name = input("First Name >>")
         validator.validate_name(last_name)
