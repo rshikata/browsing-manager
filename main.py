@@ -28,8 +28,8 @@ def main():
             print("操作選択が不正です。")
 
     except ValueError as e:
+        print("日付のフォーマットが不正です。")
         print(e)
-        print("入力が不正です。")
     except Exception as e:
         print(e)
 

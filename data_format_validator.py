@@ -20,4 +20,4 @@ class DataFormatValidator:
     # 入力された文字列の長さをチェック
     def validate_length(self, text):
         if len(text) > 50:
-            raise ValueError
+            raise Exception("名前の字数オーバーです。")
