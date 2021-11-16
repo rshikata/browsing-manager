@@ -33,19 +33,11 @@ class DBAccessor:
     def select_data(self, database_name):
         with sqlite3.connect(database_name) as connection:
             cursor = connection.cursor()
-            print(
-                "{:^28s} | {:^9s} | {:^7s} | {:^3s}".format(
-                    "名前", "閲覧日", "日報の日付", "閲覧回数"
-                )
-            )
-            print(
-                f"-----------------------------------------------------------------------"
-            )
-            for data in cursor.execute(
+
+            cursor.execute(
                 "select * from report_check_status ORDER BY browsing_date ASC"
-            ):
-                print(
-                    "{:^30s} | {:^12s} | {:^12s} | {:^5d}".format(
-                        data[0], data[1], data[2], data[3]
-                    )
-                )
+            )
+            # 全データを取得
+            registered_data = cursor.fetchall()
+
+            return registered_data

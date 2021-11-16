@@ -14,9 +14,10 @@ def main():
         # 操作を選択
         # mode 1: データ追加　2:閲覧
         mode = operator.select_mode()
-        # DBかテーブルが無ければ作成
-        operator.create_database(DATABASE_NAME)
+
         if mode == 1:
+            # DBかテーブルが無ければ作成
+            operator.create_database(DATABASE_NAME)
             # データベースに登録
             operator.add_data(DATABASE_NAME)
 
@@ -28,8 +29,8 @@ def main():
             print("操作選択が不正です。")
 
     except ValueError as e:
-        print("日付のフォーマットが不正です。")
         print(e)
+        print("入力が不正です。")
     except Exception as e:
         print(e)
 
