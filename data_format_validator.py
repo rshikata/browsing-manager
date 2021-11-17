@@ -9,7 +9,7 @@ class DataFormatValidator:
         date = datetime.strptime(date, "%Y-%m-%d")
         return date.strftime("%Y-%m-%d")
 
-    # 入力された名前に記号が含まれていないかチェック
+    # 入力された名前のチェック
     def validate_name(self, name):
         pattern = re.compile("[a-zA-Z]")
         if not name.isalpha():
@@ -20,4 +20,4 @@ class DataFormatValidator:
     # 入力された文字列の長さをチェック
     def validate_length(self, text):
         if len(text) > 50:
-            raise Exception("名前の字数オーバーです。")
+            raise ValueError
